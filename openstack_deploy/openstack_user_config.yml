@@ -1,0 +1,186 @@
+---
+cidr_networks:
+  container_cab1: 172.29.20.0/24
+  container_cab2: 172.29.21.0/24
+  container_cab3: 172.29.22.0/24
+  tunnel_cab1: 10.10.20.0/24
+  tunnel_cab2: 10.10.21.0/24
+  tunnel_cab3: 10.10.22.0/24
+  storage_cab1: 192.168.20.0/24
+  storage_cab2: 192.168.21.0/24
+  storage_cab3: 192.168.22.0/24
+
+used_ips:
+  - "172.29.236.1,172.29.236.50"
+  - "172.29.240.1,172.29.240.50"
+  - "172.29.244.1,172.29.244.50"
+  - "172.29.248.1,172.29.248.50"
+
+global_overrides:
+  internal_lb_vip_address: 172.29.236.100
+  external_lb_vip_address: 104.130.231.89
+  tunnel_bridge: "br-vxlan"
+  management_bridge: "br-mgmt"
+  provider_networks:
+    - network:
+        container_bridge: "br-mgmt"
+        container_type: "veth"
+        container_interface: "eth1"
+        ip_from_q: "container_cab1"
+        type: "raw"
+        group_binds:
+          - cab1-containers
+          - cab1-hosts
+        is_container_address: true
+        is_ssh_address: true
+    - network:
+        container_bridge: "br-mgmt"
+        container_type: "veth"
+        container_interface: "eth1"
+        ip_from_q: "container_cab2"
+        type: "raw"
+        group_binds:
+          - cab2-containers
+          - cab2-hosts
+    - network:
+        container_bridge: "br-mgmt"
+        container_type: "veth"
+        container_interface: "eth1"
+        ip_from_q: "container_cab3"
+        type: "raw"
+        group_binds:
+          - cab3-containers
+          - cab3-hosts
+    - network:
+        container_bridge: "br-vxlan"
+        container_type: "veth"
+        container_interface: "eth10"
+        ip_from_q: "tunnel_cab1"
+        type: "vxlan"
+        range: "1:1000"
+        net_name: "vxlan"
+        group_binds:
+          - cab1-neutron_linuxbridge_agent
+    - network:
+        container_bridge: "br-vxlan"
+        container_type: "veth"
+        container_interface: "eth10"
+        ip_from_q: "tunnel_cab2"
+        type: "vxlan"
+        range: "1:1000"
+        net_name: "vxlan"
+        group_binds:
+          - cab2-neutron_linuxbridge_agent
+    - network:
+        container_bridge: "br-vxlan"
+        container_type: "veth"
+        container_interface: "eth10"
+        ip_from_q: "tunnel_cab3"
+        type: "vxlan"
+        range: "1:1000"
+        net_name: "vxlan"
+        group_binds:
+          - cab3-neutron_linuxbridge_agent
+    - network:
+        container_bridge: "br-vlan"
+        container_type: "veth"
+        container_interface: "eth11"
+        type: "vlan"
+        range: "1:1"
+        net_name: "vlan"
+        group_binds:
+          - cab1-neutron_linuxbridge_agent
+          - cab2-neutron_linuxbridge_agent
+          - cab3-neutron_linuxbridge_agent
+    - network:
+        container_bridge: "br-storage"
+        container_type: "veth"
+        container_interface: "eth2"
+        ip_from_q: "storage_cab1"
+        type: "raw"
+        group_binds:
+          - glance_api
+          - cinder_api
+          - cinder_volume
+          - nova_compute
+          - swift_proxy
+
+cab1-shared-infra_hosts:
+  infra1:
+    ip: 172.29.20.100
+cab2-shared-infra_hosts:
+  infra2:
+    ip: 172.29.21.100
+cab3-shared-infra_hosts:
+  infra3:
+    ip: 172.29.22.100
+
+cab1-os-infra_hosts:
+  infra1:
+    ip: 172.29.20.100
+cab2-os-infra_hosts:
+  infra2:
+    ip: 172.29.21.100
+cab3-os-infra_hosts:
+  infra3:
+    ip: 172.29.22.100
+
+
+cab1-storage-infra_hosts:
+  infra1:
+    ip: 172.29.20.100
+cab2-storage-infra_hosts:
+  infra2:
+    ip: 172.29.21.100
+cab3-storage-infra_hosts:
+  infra3:
+    ip: 172.29.22.100
+
+cab1-repo-infra_hosts:
+  infra1:
+    ip: 172.29.20.100
+cab2-repo-infra_hosts:
+  infra2:
+    ip: 172.29.21.100
+cab3-repo-infra_hosts:
+  infra3:
+    ip: 172.29.22.100
+
+cab1-identity_hosts:
+  infra1:
+    ip: 172.29.20.100
+cab2-identity_hosts:
+  infra2:
+    ip: 172.29.21.100
+cab3-identity_hosts:
+  infra3:
+    ip: 172.29.22.100
+
+cab1-compute_hosts:
+  compute1:
+    ip: 172.29.20.101
+
+cab1-storage_hosts:
+  storage1:
+    ip: 172.29.20.102
+    container_vars:
+      cinder_backends:
+        limit_container_types: cinder_volume
+        lvm:
+          volume_group: cinder-volumes
+          volume_driver: cinder.volume.drivers.lvm.LVMVolumeDriver
+          volume_backend_name: LVM_iSCSI
+
+cab1-log_hosts:
+  log1:
+    ip: 172.29.20.103
+
+cab1-network_hosts:
+  infra1:
+    ip: 172.29.20.100
+cab2-network_hosts:
+  infra2:
+    ip: 172.29.21.100
+cab3-network_hosts:
+  infra3:
+    ip: 172.29.22.100

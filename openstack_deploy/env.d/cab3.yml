@@ -1,0 +1,438 @@
+---
+component_skel:
+  cab3-neutron_linuxbridge_agent:
+    belongs_to:
+      - neutron_all
+     
+container_skel:
+  cab3-aodh_container:
+    belongs_to:
+      - cab3-metering-alarm_containers
+    contains:
+      - aodh_api
+      - aodh_listener
+      - aodh_alarm_evaluator
+      - aodh_alarm_notifier
+    properties:
+      service_name: aodh
+      container_release: trusty
+  cab3-ceilometer_api_container:
+    belongs_to:
+      - cab3-metering-infra_containers
+    contains:
+      - ceilometer_agent_central
+      - ceilometer_agent_notification
+      - ceilometer_api
+    properties:
+      service_name: ceilometer
+      container_release: trusty
+  cab3-ceilometer_collector_container:
+    belongs_to:
+      - cab3-metering-infra_containers
+    contains:
+      - ceilometer_collector
+    properties:
+      service_name: ceilometer
+      container_release: trusty
+  cab3-metering-compute_container:
+    belongs_to:
+      - cab3-metering-compute_containers
+    contains:
+      - ceilometer_agent_compute
+    properties:
+      is_metal: true
+      service_name: ceilometer
+      container_release: trusty
+  cab3-cinder_api_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-storage-infra_containers
+    contains:
+      - cinder_api
+    properties:
+      service_name: cinder
+      container_release: trusty
+  cab3-cinder_scheduler_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-storage-infra_containers
+    contains:
+      - cinder_scheduler
+    properties:
+      service_name: cinder
+      container_release: trusty
+  cab3-cinder_volumes_container:
+    belongs_to:
+      - storage_containers
+    contains:
+      - cinder_volume
+      - cinder_backup
+    properties:
+      is_metal: true
+      service_name: cinder
+      container_release: trusty
+  cab3-galera_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-shared-infra_containers
+    contains:
+      - galera
+    properties:
+      log_directory: mysql_logs
+      service_name: galera
+      container_release: trusty
+  cab3-glance_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - glance_api
+      - glance_registry
+    properties:
+      service_name: glance
+      container_release: trusty
+      container_fs_size: 12G
+  cab3-heat_apis_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - heat_api_cloudwatch
+      - heat_api_cfn
+      - heat_api
+    properties:
+      service_name: heat
+      container_release: trusty
+  cab3-heat_engine_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - heat_engine
+    properties:
+      service_name: heat
+      container_release: trusty
+  cab3-horizon_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - horizon
+    properties:
+      service_name: horizon
+      container_release: trusty
+  cab3-keystone_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-identity_containers
+    contains:
+      - keystone
+    properties:
+      service_name: keystone
+      container_release: trusty
+  cab3-memcached_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-shared-infra_containers
+    contains:
+      - memcached
+    properties:
+      service_name: memcached
+      container_release: trusty
+  cab3-neutron_agents_container:
+    belongs_to:
+      - cab3-network_containers
+    contains:
+      - neutron_agent
+      - neutron_metadata_agent
+      - neutron_metering_agent
+      - cab3-neutron_linuxbridge_agent
+      - neutron_l3_agent
+      - neutron_dhcp_agent
+      - neutron_lbaas_agent
+    properties:
+      service_name: neutron
+      container_release: trusty
+  cab3-neutron_server_container:
+    belongs_to:
+      - cab3-network_containers
+    contains:
+      - neutron_server
+    properties:
+      service_name: neutron
+      container_release: trusty
+  cab3-nova_api_metadata_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - nova_api_metadata
+    properties:
+      service_name: nova
+      container_release: trusty
+  cab3-nova_api_os_compute_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - nova_api_os_compute
+    properties:
+      service_name: nova
+      container_release: trusty
+  cab3-nova_cert_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - nova_cert
+    properties:
+      service_name: nova
+      container_release: trusty
+  cab3-nova_compute_container:
+    belongs_to:
+      - cab3-compute_containers
+    contains:
+      - cab3-neutron_linuxbridge_agent
+      - nova_compute
+    properties:
+      is_metal: true
+      service_name: nova
+      container_release: trusty
+  cab3-nova_conductor_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - nova_conductor
+    properties:
+      service_name: nova
+      container_release: trusty
+  cab3-nova_scheduler_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - nova_scheduler
+    properties:
+      service_name: nova
+      container_release: trusty
+  cab3-nova_console_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-os-infra_containers
+    contains:
+      - nova_console
+    properties:
+      service_name: nova
+      container_release: trusty
+  cab3-repo_container:
+    belongs_to:
+      - cab3-repo-infra_containers
+    contains:
+      - pkg_repo
+    properties:
+      service_name: repo
+      container_release: trusty
+  cab3-rabbit_mq_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-shared-infra_containers
+    contains:
+      - rabbitmq
+    properties:
+      service_name: rabbitmq
+      container_release: trusty
+  cab3-rsyslog_container:
+    belongs_to:
+      - cab3-log_containers
+    contains:
+      - rsyslog
+    properties:
+      service_name: rsyslog
+      container_release: trusty
+  cab3-swift_remote_container:
+    belongs_to:
+      - cab3-swift-remote_containers
+    contains:
+      - swift_remote
+    properties:
+      is_metal: true
+      service_name: swift
+      container_release: trusty
+  cab3-swift_proxy_container:
+    belongs_to:
+      - cab3-swift-proxy_containers
+    contains:
+      - swift_proxy
+    properties:
+      service_name: swift
+      container_release: trusty
+  cab3-swift_acc_container:
+    belongs_to:
+      - cab3-swift_containers
+    contains:
+      - swift_acc
+    properties:
+      is_metal: true
+      service_name: swift
+      container_release: trusty
+  cab3-swift_obj_container:
+    belongs_to:
+      - cab3-swift_containers
+    contains:
+      - swift_obj
+    properties:
+      is_metal: true
+      service_name: swift
+      container_release: trusty
+  cab3-swift_cont_container:
+    belongs_to:
+      - cab3-swift_containers
+    contains:
+      - swift_cont
+    properties:
+      is_metal: true
+      service_name: swift
+      container_release: trusty
+  cab3-utility_container:
+    belongs_to:
+      - cab3-infra_containers
+      - cab3-shared-infra_containers
+    contains:
+      - utility
+    properties:
+      service_name: utility
+      container_release: trusty
+
+
+
+
+physical_skel:
+  cab3-infra_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-infra_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-shared-infra_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-shared-infra_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-os-infra_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-os-infra_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-metering-alarm_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-metering-alarm_hosts:
+    belongs_to:
+      - hosts 
+      - cab3-hosts
+  cab3-metering-compute_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-metering-compute_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-metering-infra_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-metering-infra_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-storage-infra_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-storage-infra_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-storage_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-storage_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-identity_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-identity_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-network_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-network_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-compute_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-compute_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-repo-infra_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-repo-infra_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-log_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-log_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-swift-remote_containers:
+    belongs_to:
+      - remote_containers
+      - cab3-remote_containers
+  cab3-swift-remote_hosts:
+    belongs_to:
+      - remote
+      - cab3-remote
+  cab3-swift_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-swift_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts
+  cab3-swift-proxy_containers:
+    belongs_to:
+      - all_containers
+      - cab3-containers
+  cab3-swift-proxy_hosts:
+    belongs_to:
+      - hosts
+      - cab3-hosts

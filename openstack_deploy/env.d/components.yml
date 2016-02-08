@@ -1,0 +1,142 @@
+---
+component_skel:
+  aodh_api:
+    belongs_to:
+      - aodh_all
+  aodh_listener:
+    belongs_to:
+      - aodh_all
+  aodh_alarm_evaluator:
+    belongs_to:
+      - aodh_all
+  aodh_alarm_notifier:
+    belongs_to:
+      - aodh_all
+  ceilometer_agent_compute:
+    belongs_to:
+      - ceilometer-all
+  ceilometer_agent_central:
+    belongs_to:
+      - ceilometer_all
+  ceilometer_agent_notification:
+    belongs_to:
+      - ceilometer_all
+  ceilometer_collector:
+    belongs_to:
+      - ceilometer_all
+  ceilometer_api:
+    belongs_to:
+      - ceilometer_all
+  cinder_api:
+    belongs_to:
+      - cinder_all
+  cinder_scheduler:
+    belongs_to:
+      - cinder_all
+  cinder_volume:
+    belongs_to:
+      - cinder_all
+  cinder_backup:
+    belongs_to:
+      - cinder_all
+  galera:
+    belongs_to:
+      - galera_all
+  glance_api:
+    belongs_to:
+      - glance_all
+  glance_registry:
+    belongs_to:
+      - glance_all
+  heat_api:
+    belongs_to:
+      - heat_all
+  heat_api_cfn:
+    belongs_to:
+      - heat_all
+  heat_api_cloudwatch:
+    belongs_to:
+      - heat_all
+  heat_engine:
+    belongs_to:
+      - heat_all
+  horizon:
+    belongs_to:
+      - horizon_all
+  keystone:
+    belongs_to:
+      - keystone_all
+  memcached:
+    belongs_to:
+      - memcached_all
+  neutron_agent:
+    belongs_to:
+      - neutron_all
+  neutron_dhcp_agent:
+    belongs_to:
+      - neutron_all
+# linuxbridge_agent is in the cabx.yml files because provider_network
+# bindings are in a per linuxbridge agent basis
+  neutron_metering_agent:
+    belongs_to:
+      - neutron_all
+  neutron_l3_agent:
+    belongs_to:
+      - neutron_all
+  neutron_lbaas_agent:
+    belongs_to:
+      - neutron_all
+  neutron_metadata_agent:
+    belongs_to:
+      - neutron_all
+  neutron_server:
+    belongs_to:
+      - neutron_all
+  nova_api_metadata:
+    belongs_to:
+      - nova_all
+  nova_api_os_compute:
+    belongs_to:
+      - nova_all
+  nova_cert:
+    belongs_to:
+      - nova_all
+  nova_compute:
+    belongs_to:
+      - nova_all
+  nova_conductor:
+    belongs_to:
+      - nova_all
+  nova_scheduler:
+    belongs_to:
+      - nova_all
+  nova_console:
+    belongs_to:
+      - nova_all
+  pkg_repo:
+    belongs_to:
+      - repo_all
+  rabbitmq:
+    belongs_to:
+      - rabbitmq_all
+  rsyslog:
+    belongs_to:
+      - rsyslog_all
+  swift_remote:
+    belongs_to:
+      - swift_remote_all
+  swift_proxy:
+    belongs_to:
+      - swift_all
+  swift_acc:
+    belongs_to:
+      - swift_all
+  swift_obj:
+    belongs_to:
+      - swift_all
+  swift_cont:
+    belongs_to:
+      - swift_all
+  utility:
+    belongs_to:
+      - utility_all
