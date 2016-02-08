@@ -3,6 +3,21 @@ component_skel:
   cab2-neutron_linuxbridge_agent:
     belongs_to:
       - neutron_all
+  cab2-glance_api:
+    belongs_to:
+      - glance_all
+  cab2-cinder_api:
+    belongs_to:
+      - cinder_all
+  cab2-cinder_volume:
+    belongs_to:
+      - cinder_all
+  cab2-nova_compute:
+    belongs_to:
+      - nova_all
+  cab2-swift_proxy:
+    belongs_to:
+      - swift_proxy
      
 container_skel:
   cab2-aodh_container:
@@ -48,7 +63,7 @@ container_skel:
       - cab2-infra_containers
       - cab2-storage-infra_containers
     contains:
-      - cinder_api
+      - cab2-cinder_api
     properties:
       service_name: cinder
       container_release: trusty
@@ -65,7 +80,7 @@ container_skel:
     belongs_to:
       - storage_containers
     contains:
-      - cinder_volume
+      - cab2-cinder_volume
       - cinder_backup
     properties:
       is_metal: true
@@ -86,7 +101,7 @@ container_skel:
       - cab2-infra_containers
       - cab2-os-infra_containers
     contains:
-      - glance_api
+      - cab2-glance_api
       - glance_registry
     properties:
       service_name: glance
@@ -193,7 +208,7 @@ container_skel:
       - cab2-compute_containers
     contains:
       - cab2-neutron_linuxbridge_agent
-      - nova_compute
+      - cab2-nova_compute
     properties:
       is_metal: true
       service_name: nova
@@ -263,7 +278,7 @@ container_skel:
     belongs_to:
       - cab2-swift-proxy_containers
     contains:
-      - swift_proxy
+      - cab2-swift_proxy
     properties:
       service_name: swift
       container_release: trusty

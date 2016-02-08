@@ -27,24 +27,21 @@ component_skel:
   ceilometer_api:
     belongs_to:
       - ceilometer_all
-  cinder_api:
-    belongs_to:
-      - cinder_all
+# cinder_api is defined on a per cab basis
+# because it is used for storage network bindings
   cinder_scheduler:
     belongs_to:
       - cinder_all
-  cinder_volume:
-    belongs_to:
-      - cinder_all
+# cinder_volume is defined on a per cab basis
+# because it is used for storage network bindings
   cinder_backup:
     belongs_to:
       - cinder_all
   galera:
     belongs_to:
       - galera_all
-  glance_api:
-    belongs_to:
-      - glance_all
+# glance_api is defined on a per cab basis
+# because it is used for storage network bindings
   glance_registry:
     belongs_to:
       - glance_all
@@ -101,9 +98,8 @@ component_skel:
   nova_cert:
     belongs_to:
       - nova_all
-  nova_compute:
-    belongs_to:
-      - nova_all
+# nova_compute is defined on a per cab basis
+# because it is used for storage network bindings
   nova_conductor:
     belongs_to:
       - nova_all
@@ -125,9 +121,8 @@ component_skel:
   swift_remote:
     belongs_to:
       - swift_remote_all
-  swift_proxy:
-    belongs_to:
-      - swift_all
+# swift_proxy is defined on a per cab basis
+# because it is used for storage network bindings
   swift_acc:
     belongs_to:
       - swift_all

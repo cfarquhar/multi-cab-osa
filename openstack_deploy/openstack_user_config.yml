@@ -103,11 +103,35 @@ global_overrides:
         ip_from_q: "storage_cab1"
         type: "raw"
         group_binds:
-          - glance_api
-          - cinder_api
-          - cinder_volume
-          - nova_compute
-          - swift_proxy
+          - cab1-glance_api
+          - cab1-cinder_api
+          - cab1-cinder_volume
+          - cab1-nova_compute
+          - cab1-swift_proxy
+    - network:
+        container_bridge: "br-storage"
+        container_type: "veth"
+        container_interface: "eth2"
+        ip_from_q: "storage_cab2"
+        type: "raw"
+        group_binds:
+          - cab2-glance_api
+          - cab2-cinder_api
+          - cab2-cinder_volume
+          - cab2-nova_compute
+          - cab2-swift_proxy
+    - network:
+        container_bridge: "br-storage"
+        container_type: "veth"
+        container_interface: "eth2"
+        ip_from_q: "storage_cab3"
+        type: "raw"
+        group_binds:
+          - cab3-glance_api
+          - cab3-cinder_api
+          - cab3-cinder_volume
+          - cab3-nova_compute
+          - cab3-swift_proxy
 
 cab1-shared-infra_hosts:
   infra1:
