@@ -42,6 +42,8 @@ global_overrides:
         group_binds:
           - cab2-containers
           - cab2-hosts
+        is_container_address: true
+        is_ssh_address: true
     - network:
         container_bridge: "br-mgmt"
         container_type: "veth"
@@ -51,6 +53,8 @@ global_overrides:
         group_binds:
           - cab3-containers
           - cab3-hosts
+        is_container_address: true
+        is_ssh_address: true
     - network:
         container_bridge: "br-vxlan"
         container_type: "veth"
