@@ -63,6 +63,7 @@ container_skel:
       - cab1-infra_containers
       - cab1-storage-infra_containers
     contains:
+      - cinder_api
       - cab1-cinder_api
     properties:
       service_name: cinder
@@ -78,8 +79,9 @@ container_skel:
       container_release: trusty
   cab1-cinder_volumes_container:
     belongs_to:
-      - storage_containers
+      - cab1-storage_containers
     contains:
+      - cinder_volume
       - cab1-cinder_volume
       - cinder_backup
     properties:
@@ -101,6 +103,7 @@ container_skel:
       - cab1-infra_containers
       - cab1-os-infra_containers
     contains:
+      - glance_api
       - cab1-glance_api
       - glance_registry
     properties:
@@ -161,6 +164,7 @@ container_skel:
       - neutron_agent
       - neutron_metadata_agent
       - neutron_metering_agent
+      - neutron_linuxbridge_agent
       - cab1-neutron_linuxbridge_agent
       - neutron_l3_agent
       - neutron_dhcp_agent
@@ -207,7 +211,9 @@ container_skel:
     belongs_to:
       - cab1-compute_containers
     contains:
+      - neutron_linuxbridge_agent
       - cab1-neutron_linuxbridge_agent
+      - nova_compute
       - cab1-nova_compute
     properties:
       is_metal: true
@@ -278,6 +284,7 @@ container_skel:
     belongs_to:
       - cab1-swift-proxy_containers
     contains:
+      - swift_proxy
       - cab1-swift_proxy
     properties:
       service_name: swift

@@ -29,11 +29,17 @@ component_skel:
       - ceilometer_all
 # cinder_api is defined on a per cab basis
 # because it is used for storage network bindings
+  cinder_api:
+    belongs_to:
+      - cinder_all
   cinder_scheduler:
     belongs_to:
       - cinder_all
 # cinder_volume is defined on a per cab basis
 # because it is used for storage network bindings
+  cinder_volume:
+    belongs_to:
+      - cinder_all
   cinder_backup:
     belongs_to:
       - cinder_all
@@ -42,6 +48,9 @@ component_skel:
       - galera_all
 # glance_api is defined on a per cab basis
 # because it is used for storage network bindings
+  glance_api:
+    belongs_to:
+      - glance_all
   glance_registry:
     belongs_to:
       - glance_all
@@ -74,6 +83,9 @@ component_skel:
       - neutron_all
 # linuxbridge_agent is in the cabx.yml files because provider_network
 # bindings are in a per linuxbridge agent basis
+  neutron_linuxbridge_agent:
+    belongs_to:
+      - neutron_all
   neutron_metering_agent:
     belongs_to:
       - neutron_all
@@ -100,6 +112,9 @@ component_skel:
       - nova_all
 # nova_compute is defined on a per cab basis
 # because it is used for storage network bindings
+  nova_compute:
+    belongs_to:
+      - nova_all
   nova_conductor:
     belongs_to:
       - nova_all
@@ -123,6 +138,9 @@ component_skel:
       - swift_remote_all
 # swift_proxy is defined on a per cab basis
 # because it is used for storage network bindings
+  swift_proxy:
+    belongs_to:
+      - swift_all
   swift_acc:
     belongs_to:
       - swift_all
