@@ -15,6 +15,9 @@ component_skel:
   cab3-nova_compute:
     belongs_to:
       - nova_all
+  cab3-rabbit_mq:
+    belongs_to:
+      - rabbitmq_all
   cab3-swift_proxy:
     belongs_to:
       - swift_proxy
@@ -260,6 +263,7 @@ container_skel:
       - cab3-shared-infra_containers
     contains:
       - rabbitmq
+      - cab3-rabbit_mq
     properties:
       service_name: rabbitmq
       container_release: trusty
